@@ -1,21 +1,56 @@
+# Unified Application Configuration (Production + Experimental Reference)
+
 application:
   name: DevOpsSimulator
   version: 1.0.0
-  environment: production
-  
+  environment: production  # Stable environment
+  # experimental_version: 2.0.0-beta  # From conflict-simulator
+
 server:
   host: 0.0.0.0
   port: 8080
   ssl_enabled: true
-  
+  # --- Experimental (from conflict-simulator) ---
+  # hot_reload: true
+  # host: localhost
+  # port: 3000
+  # ssl_enabled: false
+
 logging:
   level: INFO
   format: json
-  
-# Development configuration (enabled via environment variable)
-development:
-  enabled: false
-  port: 3000
-  hot_reload: false
-  debug_mode: false
-  mock_apis: false
+  output: /var/log/app.log
+  # --- Experimental (from conflict-simulator) ---
+  # level: DEBUG
+  # format: pretty
+  # output: console
+  # show_stack_trace: true
+
+database:
+  host: prod-db.example.com
+  port: 5432
+  name: devops_prod
+  # --- Experimental (from conflict-simulator) ---
+  # host: localhost
+  # name: devops_dev
+
+features:
+  auto_scaling: true
+  load_balancer: enabled
+  backup_enabled: true
+  # --- Experimental (from conflict-simulator) ---
+  # auto_scaling: false
+  # load_balancer: disabled
+  # backup_enabled: false
+  # experimental_features: true
+
+# Optional development/testing flags (keep commented for production)
+# development:
+#   mock_external_apis: true
+#   debug_mode: true
+#   cors_enabled: true
+#
+# notifications:
+#   slack_webhook: "https://hooks.slack.com/services/XXX"
+#   discord_webhook: "https://discord.com/api/webhooks/YYY"
+#   email_alerts: false
